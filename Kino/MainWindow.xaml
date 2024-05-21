@@ -1,0 +1,70 @@
+﻿<Window x:Class="Kino.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kino"
+        xmlns:control="clr-namespace:Kino"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="850" MinHeight="550" MinWidth="850">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Expander  Margin="0,70,0,0" Header="Жанр" FontSize="14">
+                <ScrollViewer Height="100">
+                    <ListBox Name="GenresExpander" Margin="20,0,0,0" FontSize="14" SelectionChanged="ListBox_SelectionChanged"/>
+                </ScrollViewer>
+            </Expander>
+            <Expander Header="Год" FontSize="14" >
+                <ScrollViewer Height="100">
+                    <ListBox Name ="YearsMovie" Margin="20,0,0,0" FontSize="14" SelectionChanged="ListBox_SelectionChanged"/>
+                </ScrollViewer>
+            </Expander>
+            <Expander Header="Страна" FontSize="14">
+                <ScrollViewer Height="100">
+                    <ListBox x:Name="CountryExpander" Margin="20,0,0,0" FontSize="14" SelectionChanged="ListBox_SelectionChanged"/>
+                </ScrollViewer>
+            </Expander>
+            <Label Margin="0,0,0,0" Content="Рейтинг" FontSize="14"/>
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="RatngSlider" Margin="5,0" Minimum="0.0" Maximum="10.0" ValueChanged="ListBox_SelectionChanged" IsSnapToTickEnabled="True" TickFrequency="0.1" Width="120"/>
+                <TextBox Text="{Binding ElementName=RatngSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="30" TextAlignment="Center" FontSize="14"/>
+            </StackPanel>
+            <Grid Margin="0,275,0,0" Height="55">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="PrevButton" FontSize="20" Content="&lt;" Margin="10" Grid.Column="0" Click="Button_Click"/>
+                <TextBlock x:Name="Pages" FontSize="25" Text="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button x:Name="NextButton" FontSize="20" Content=">" Margin="10" Grid.Column="2" Click="Button_Click"/>
+            </Grid>
+        </StackPanel>
+        
+        <Grid Grid.Column="1" x:Name="StackMovies">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.10*"/>
+                <RowDefinition Height="0.09*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3.5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="SearchMovie" Margin="10,5,10,5" FontSize="16"/>
+                <Button Grid.Column="1" Margin="0,3,25,3" FontSize="16" Content="ПОИСК" FontWeight="Bold" Click="ListBox_SelectionChanged"/>
+            </Grid>
+            <TextBlock FontSize="20" Text="Топ 250 фильмов" FontWeight="Bold" Margin="20,5,0,5" Grid.Row="1"/>
+            <ScrollViewer Grid.Row="7" >
+                <WrapPanel x:Name="MoviesPanel">
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</Window>
